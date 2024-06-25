@@ -6,18 +6,18 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 mongoose
-    .connect("mongodb://127.0.0.1:27017/cohort-tools-api")
-    .then((x) => console.log(`Connected to Database: "${x.connections[0].name}"`))
-    .catch((err) => console.error("Error connecting to MongoDB", err));
+  .connect("mongodb://127.0.0.1:27017/cohort-tools-api")
+  .then((x) => console.log(`Connected to Database: "${x.connections[0].name}"`))
+  .catch((err) => console.error("Error connecting to MongoDB", err));
 
 // INITIALIZE EXPRESS APP - https://expressjs.com/en/4x/api.html#express
 const app = express();
 
 // MIDDLEWARE
 app.use(
-    cors({
-        origin: ["http://localhost:5173"], // add more if necessary
-    })
+  cors({
+    origin: ["http://localhost:5173"], // add more if necessary
+  })
 );
 app.use(express.json());
 app.use(morgan("dev"));
@@ -30,10 +30,10 @@ app.use("/api/cohorts", require("./routes/api.cohorts.routes.js"));
 app.use("/api/students", require("./routes/students.routes"));
 
 app.get("/docs", (req, res) => {
-    res.sendFile(__dirname + "/views/docs.html");
+  res.sendFile(__dirname + "/views/docs.html");
 });
 
 // START SERVER
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+  console.log(`Server listening on port ${PORT}`);
 });
