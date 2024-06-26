@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 //Mongoose Schemas
 const cohortSchema = new Schema({
-  cohortSlug: { type: String, unique: true }, // String is shorthand for {type: String}
+  cohortSlug: { type: String, unique: true, required: true }, // String is shorthand for {type: String}
   cohortName: { type: String, required: true },
   program: {
     type: String,
@@ -12,7 +12,16 @@ const cohortSchema = new Schema({
   format: { type: String, enum: ["Full Time", "Part Time"] },
   campus: {
     type: String,
-    enum: ["Madrid", "Barcelona", "Miami", "Paris", "Berlin", "Amsterdam", "Lisbon", "Remote"],
+    enum: [
+      "Madrid",
+      "Barcelona",
+      "Miami",
+      "Paris",
+      "Berlin",
+      "Amsterdam",
+      "Lisbon",
+      "Remote",
+    ],
   },
   startDate: { type: Date, default: Date.now },
   endDate: { type: Date },
