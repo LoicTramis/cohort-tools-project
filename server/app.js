@@ -1,17 +1,17 @@
+require("dotenv").config();
 require("./config/dbConnect.js");
 const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
-const PORT = 5005;
 const cors = require("cors");
-
+const PORT = process.env.PORT || 5005;
 // INITIALIZE EXPRESS APP - https://expressjs.com/en/4x/api.html#express
 const app = express();
 
 // MIDDLEWARE
 app.use(
   cors({
-    origin: ["http://localhost:5173"], // add more if necessary
+    origin: [process.env.FRONTEND_DEV, process.env.FRONTEND_PROD], // add more if necessary
   })
 );
 app.use(express.json());
@@ -21,8 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // ROUTES - https://expressjs.com/en/starter/basic-routing.html
-app.use("/api/cohorts", require("./routes/api.cohorts.routes.js"));
-app.use("/api/students", require("./routes/students.routes"));
+app.use("/api", require("./routes/index.routes.js"));
 
 app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
