@@ -4,7 +4,7 @@ function CohortCard({
   _id,
   program,
   inProgress,
-  campus,
+  format,
   cohortName,
   cohortSlug,
   className,
@@ -16,7 +16,7 @@ function CohortCard({
       >
         <span style={{ flexBasis: "25%" }}>{cohortName}</span>
         <span style={{ flexBasis: "15%" }}>{program}</span>
-        <span style={{ flexBasis: "15%" }}>{campus}</span>
+        <span style={{ flexBasis: "15%" }}>{format}</span>
         <span style={{ flexBasis: "15%" }}>{inProgress ? "✅" : "⬜️"}</span>
         <span style={{ flexBasis: "25%" }}>{cohortSlug}</span>
       </div>

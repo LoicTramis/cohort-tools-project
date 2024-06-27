@@ -15,6 +15,7 @@ router.get("/", async (req, res, next) => {
     const cohorts = await Cohort.find(query, {
       cohortName: 1,
       campus: 1,
+      format: 1,
       program: 1,
       inProgress: 1,
       cohortSlug: 1,
