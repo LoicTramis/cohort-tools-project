@@ -15,6 +15,7 @@ router.get("/", async (req, res, next) => {
         const cohorts = await Cohort.find(query, {
             cohortName: 1,
             campus: 1,
+            format: 1,
             program: 1,
             inProgress: 1,
             cohortSlug: 1,
@@ -22,7 +23,8 @@ router.get("/", async (req, res, next) => {
         console.log("Retrieved cohorts ->", cohorts);
         res.json(cohorts);
     } catch (error) {
-        next(error);
+        console.error("Error while retrieving cohorts ->", error);
+        res.status(500).json({ error: "Failed to retrieve cohorts" });
     }
 });
 
