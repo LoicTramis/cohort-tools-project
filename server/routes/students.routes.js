@@ -10,7 +10,7 @@ router.get("/", async (req, res, next) => {
         const students = await Students.find({}).populate("cohort");
         res.status(200).json(students);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 });
 
@@ -36,7 +36,7 @@ router.post("/", async (req, res, next) => {
         const createdStudent = await Student.create(newStudent);
         res.status(201).json(createdStudent);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 });
 
@@ -49,7 +49,7 @@ router.get("/cohort/:cohortId", async (req, res, next) => {
         const studentsCohort = await Student.find({ cohort: cohortId }).populate("cohort");
         res.status(200).json(studentsCohort);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 });
 
@@ -62,7 +62,7 @@ router.get("/:studentId", async (req, res, next) => {
         const student = await Student.findById(studentId).populate("cohort");
         res.status(200).json(student);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 });
 /**
@@ -75,7 +75,7 @@ router.put("/:studentId", async (req, res, next) => {
         const student = await Student.findByIdAndUpdate(studentId, updatedStudent);
         res.status(200).json(student);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 });
 
@@ -88,7 +88,7 @@ router.delete("/:studentId", async (req, res, next) => {
         const student = await Student.findByIdAndDelete(studentId);
         res.status(202).json(student);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 });
 
