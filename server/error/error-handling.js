@@ -1,6 +1,6 @@
 const errorHandler = (err, req, res, next) => {
   if (!res.headersSent) {
-    res.status(500).json({ error: "Internal servr error" });
+    res.status(500).json({ error: err.message });
   }
 };
 const notFoundHandler = (req, res, next) => {

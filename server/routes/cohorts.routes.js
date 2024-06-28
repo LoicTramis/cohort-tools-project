@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Cohort = require("../model/Cohort.model");
+// const isAuth = require("../middlewares/isAuthenticated");
 
 // GET ALL COHORTS ROUTE
 router.get("/", async (req, res, next) => {
