@@ -1,9 +1,11 @@
 const router = require("express").Router();
+const { isAuth } = require("../middleware/jwt.middleware");
 const Cohort = require("../model/Cohort.model");
+
 // const isAuth = require("../middlewares/isAuthenticated");
 
 // GET ALL COHORTS ROUTE
-router.get("/", async (req, res, next) => {
+router.get("/", isAuth, async (req, res, next) => {
   const query = {};
   const { campus, program } = req.query;
   if (campus) {
@@ -29,7 +31,7 @@ router.get("/", async (req, res, next) => {
 });
 
 // GET ONE COHORT ROUTE
-router.get("/:cohortId", async (req, res, next) => {
+router.get("/:cohortId", isAuth, async (req, res, next) => {
   try {
     const { cohortId } = req.params;
     const oneCohort = await Cohort.findOne({ _id: cohortId });
@@ -41,7 +43,7 @@ router.get("/:cohortId", async (req, res, next) => {
 });
 
 // UPDATE ONE COHORT ROUTE
-router.put("/:cohortId", async (req, res, next) => {
+router.put("/:cohortId", isAuth, async (req, res, next) => {
   try {
     const {
       cohortSlug,
@@ -85,7 +87,7 @@ router.put("/:cohortId", async (req, res, next) => {
 });
 
 // POST COHORT ROUTE
-router.post("/", async (req, res, next) => {
+router.post("/", isAuth, async (req, res, next) => {
   const {
     cohortSlug,
     cohortName,
@@ -125,7 +127,7 @@ router.post("/", async (req, res, next) => {
 
 // DELETE COHORT ROUTE
 
-router.delete("/:cohortId", async (req, res, next) => {
+router.delete("/:cohortId", isAuth, async (req, res, next) => {
   try {
     const { cohortId } = req.params;
     await Cohort.findOneAndDelete({ _id: cohortId });
